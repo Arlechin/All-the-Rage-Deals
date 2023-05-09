@@ -1,0 +1,200 @@
+<script>
+	$(document).ready(function() {
+		$(parent(".update_form")).click(function(event) {
+			event.preventDefault();
+			var username = $('#username').val();
+			var password = $('#password').val();
+			var repeatPassword = $('#repeat-password').val();
+			var email = $('#email').val();
+			var action = $('#action').val();
+			var submit = $('#submit').val();
+			
+			$(".form-message").load("be-login-signup.php", {
+				'username': username,
+				'password': password,
+				'repeatPassword': repeatPassword,
+				'email': email,
+				'action': action,
+				'submit': submit
+			});
+		});
+	});
+</script>
+
+
+
+
+
+<script>
+	var action = "<?php echo $_POST['action']; ?>";
+	if(action == "signup"){
+		$("#username, #email, #password, #repeat-password").removeClass("input-error");
+
+		var errorEmptyFields = "<?php=json_encode($errorEmptyFields) ?>";
+		var errorInvalidEmail = "<?php=json_encode($errorInvalidEmail); ?>";
+		var errorRepeatedPassword = "<?php=json_encode($errorRepeatedPassword); ?>";
+		var errorInvalidPassword = "<?php=json_encode($errorInvalidPassword); ?>";
+		var errorUsernameTaken = "<?php=json_encode($errorUsernameTaken); ?>";
+		var errorFailedQuery = "<?php=json_encode($errorFailedQuery); ?>";
+
+		if(errorEmptyFields == true){
+			//$("#username, #email, #password, #repeat-password").addClass("input-error");
+		}
+
+		if(errorInvalidEmail == true){
+			$("#email").addClass("input-error");
+		}
+
+		if(errorRepeatedPassword == true){
+			$("#password, #repeat-password").addClass("input-error");
+		}
+
+		if(errorInvalidPassword == true){
+			$("#password, #repeat-password").addClass("input-error");
+		}
+
+		if(errorUsernameTaken == true){
+			$("#username").addClass("input-error");
+		}
+
+		if(errorEmptyFields == false && errorInvalidEmail == false && errorRepeatedPassword == false && errorInvalidPassword == false && errorUsernameTaken == false) {
+			$("#username, #email, #password, #repeat-password").val("");
+		}
+	}else if(action == "login"){
+		var errorWrongCredentials = "<?php=json_encode($errorWrongCredentials) ?>";
+
+		if(errorWrongCredentials == true){
+			$("#username, #password").addClass("input-error");
+		}
+
+		if(errorWrongCredentials == false){
+			$("#username, #password").val("");
+		}
+	}
+
+</script>
+
+
+.form input.has-error {
+	border: 1px solid #d76666;
+	box-shadow:  0 0 5px red;
+}
+
+
+<script>
+	jQuery(document).ready(function(){
+		$("#username-signup, #email-signup, #password-signup, #repeat-password-signup, #username-login, #password-login").removeClass("input-error");
+		var submitAction = "<?php echo $_POST['submitAction']; ?>";
+		console.log("submitAction: " + submitAction);
+		if(submitAction == "signup"){
+			ajax_signup_bool_query=$.ajax({
+				url:"be-login-signup.php",
+				type: "POST",
+				dataType: "json",
+				data: {action: 'retrieveBoolSignup'},
+				success:function(response){
+					console.log(response);
+					/*var booleans = $.parseJSON(response);
+					var errorEmptyFields = booleans[0];*/
+				}
+			});
+			ajax_signup_bool_query.done(processAjaxBoolean);			
+			/*if(errorEmptyFields == true){
+				$("#username-signup, #email-signup, #password-signup, #repeat-password-signup").addClass("input-error");
+			}
+
+			if(errorInvalidEmail == true){
+				$("#email-signup").addClass("input-error");
+			}
+
+			if(errorRepeatedPassword == true){
+				$("#password-signup, #repeat-password-signup").addClass("input-error");
+			}
+
+			if(errorInvalidPassword == true){
+				$("#password-signup, #repeat-password-signup").addClass("input-error");
+			}
+
+			if(errorUsernameTaken == true){
+				$("#username-signup").addClass("input-error");
+			}
+
+			if((errorEmptyFields == false) && (errorInvalidEmail == false) && (errorRepeatedPassword == false) && (errorInvalidPassword == false) && (errorUsernameTaken == false)) {
+				$("#username-signup, #email-signup, #password-signup, #repeat-password-signup").val("");
+			}
+		}else if(submitAction == "login"){
+			if(errorWrongCredentials == true){
+				$("#username-login, #password-login").addClass("input-error");
+			}
+
+			if(errorWrongCredentials == false){
+				$("#username-login, #password-login").val("");
+			}*/
+		}
+		function processAjaxBoolean(response){
+			var booleans = $.parseJSON(response);
+			var errorEmptyFields = booleans[0];
+			console.log("Error: " + response);
+			if(errorEmptyFields == true){
+				$("#username-signup, #email-signup, #password-signup, #repeat-password-signup").addClass("input-error");
+			}
+		}
+	});
+</script>*/
+
+
+
+/*<script>
+	function logout(){
+		$(document).ready(function(){
+			event.preventDefault();
+			var nothingness = "nothingness";
+			//var loggedIn = $_SESSION["Loggedin"];
+			//var username = $_SESSION["Username"];
+			$(".session-message").load("be-logout.php", {
+					'nothingness': nothingness
+			});
+		});
+	}
+</script>
+
+
+function logout(){
+	$(document).ready(function(){
+		var nothingness = "nothingness";
+		$(".session-message").ajax({
+			url: 'be-logout.php',
+			type: 'POST'
+		}).done(function(data){
+			console.log("Logout done");
+		})
+	});
+}
+
+
+<script>
+	$(document).ready(function(){
+		let loggedin: <?php echo $_SESSION["Loggedin"]; ?>
+		if(typeof loggedin !== 'undefined'){
+			if(loggedin == true){
+				let type: <?php echo $_SESSION["Type"]; ?>
+				if(type == "user"){
+					const sub_menu = document.getElementById("sub-menu-menu");
+					let username: <?php echo $_SESSION["Username"]; ?>
+					let html = '<div class="user-info"><img src="./images/user.png"><h3>username</h3></div><hr>';
+					sub_menu.insertAdjacentHTML("afterbegin", html);
+				}else if(type == "admin"){
+					const sub_menu = document.getElementById("sub-menu-menu");
+					let username: <?php echo $_SESSION["Username"]; ?>
+					let html = '<div class="user-info"><img src="./images/user.png"><h3>username</h3></div><hr><a href="fe-admin-profile-management.php" class="sub-menu-link"><img src="./images/edit.png"><p>Edit profile</p><span>></span></a><a href="be-logout.php" class="sub-menu-link"><img src="./images/logout.png" id="logout-img"><p>Log out</p><span>></span></a>';
+					sub_menu.insertAdjacentHTML("beforeend", html);
+				}
+			}
+		}else{
+			const sub_menu = document.getElementById("sub-menu-menu");
+			let html = '<div class="user-info"><img src="./images/user.png"><h3>Please sign up or log in.</h3></div><hr><a href="fe-login-signup.php" class="sub-menu-link"><img src="./images/edit.png"><p>Profile management</p><span>></span></a><a href="be-logout.php" class="sub-menu-link"><img src="./images/logout.png" id="logout-img"><p>Log out</p><span>></span></a>';
+			sub_menu.insertAdjacentHTML("beforeend", html);
+		}
+	});	
+
+</script>
