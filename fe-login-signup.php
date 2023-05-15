@@ -103,7 +103,7 @@
 		</div>
 		<script src="fe-login-signup-script.js"></script>
 		<script src="./fe-sub-menu-script.js"></script>
-		<?php require 'login-signup-submitData.php'; ?>
+		<?php require 'login-signup-submitData-script.php'; ?>
 		<?php require './inject-html.php'; ?>
 	</body>
 </html>
