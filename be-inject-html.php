@@ -13,6 +13,8 @@
 				}else{
 					$_SESSION["addCategories"] = false;
 				}
+			}else{
+				$_SESSION["addCategories"] = false;
 			}
 			
 			$returnArr = ["message"=>"ajaxSuccess!","loggedin"=>$_SESSION["Loggedin"],"username"=>$_SESSION["Username"],"type"=>$_SESSION["Type"],"addCategories"=>$_SESSION["addCategories"]];
