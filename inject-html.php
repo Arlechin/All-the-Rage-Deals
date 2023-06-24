@@ -38,20 +38,52 @@
 						const side_nav_container = document.getElementById('side-nav-container');
 						let html_side_nav_admin = '<div class="side-nav-admin"><a href="#" class="side-nav-admin-logo"><img src="./images/ATRD-logo-cut.png" class="side-nav-admin-logo-img"><img src="./images/ATRD-small-logo.png" class="side-nav-admin-logo-icon"></a><ul class="side-nav-admin-links"><li><a href="fe-upload-products.php"><i class="fa-solid fa-upload"></i><p>Upload Products</p></a></li><li><a href="fe-upload-stores.php"><i class="fa-solid fa-upload"></i><p>Upload Stores</p></a></li><li><a href="fe-visualize-statistics.php"><i class="fa-solid fa-chart-column"></i><p>Statistics</p></a></li><li><a href="fe-leaderboard.php"><i class="fa-solid fa-trophy"></i><p>Leaderboard</p></a></li><li><a href="fe-deal-map-admin.php"><i class="fa-solid fa-map-location-dot"></i><p>Deal Map</p></a></li><div class="side-nav-admin-link-active"></div></ul></div>';
 						side_nav_container.insertAdjacentHTML("afterbegin", html_side_nav_admin);
-						//upload/add-more categories/subcategories
+						//upload products 
 						if(window.location.pathname == "/webproject/fe-upload-products.php"){
+							// upload categories
 							if(parsedResponse.addCategories == false){
 								let modulePath = "./upload-categories-script.js";
 								import(modulePath);
 								const upload_categories_container = document.getElementById('upload-categories-container');
-								let html_upload_cat_admin = '<h3>Choose the json file containing the categories/subcategories you would like to upload.</h3><form id="upload-categories-subcategories"><input type="file" id="categoriesFile" name="catFilename"><input type="submit" id="uploadSubmitFile" accept=".json"></form>';
+								let html_upload_cat_admin = '<h3>Choose the json file containing the categories/subcategories you want to upload.</h3><form id="upload-categories-subcategories"><input type="file" id="categoriesFile" name="catFilename"><input type="submit" id="uploadCatSubmitFile" accept=".json"></form>';
 								upload_categories_container.insertAdjacentHTML("afterbegin", html_upload_cat_admin);
+							// add more categories to the existing
 							}else{
 								let modulePath = "./upload-more-categories-script.js";
 								import(modulePath);
 								const upload_categories_container = document.getElementById('upload-categories-container');
-								let html_add_more_cat_admin = '<h3>Choose the json file containing the categories/subcategories you would like to add to the already existing ones.</h3><form id="add-more-categories-subcategories"><input type="file" id="moreCategoriesFile" name="moreCatFilename"><input type="submit" id="addMoreSubmitFile" accept=".json" value="Add more"></form>';
+								let html_add_more_cat_admin = '<h3>Choose the json file containing the categories/subcategories you want to add to the already existing ones.</h3><form id="add-more-categories-subcategories"><input type="file" id="moreCategoriesFile" name="moreCatFilename"><input type="submit" id="addMoreCatSubmitFile" accept=".json" value="Add more"></form>';
 								upload_categories_container.insertAdjacentHTML("afterbegin", html_add_more_cat_admin);
+							}
+							//upload products
+							if(parsedResponse.addProducts == false){
+								let modulePath = "./upload-products-script.js";
+								import(modulePath);
+								const upload_products_container = document.getElementById('upload-products-container');
+								let html_upload_prod_admin = '<h3>Choose the json file containing the products you want to upload.</h3><form id="upload-products"><input type="file" id="productsFile" name="prodFilename"><input type="submit" id="uploadProdSubmitFile" accept=.json"></form>';
+								upload_products_container.insertAdjacentHTML("afterbegin",html_upload_prod_admin);
+							// add more products to the existing
+							}else{
+								let modulePath = "./upload-products-script.js";
+								import(modulePath);
+								const upload_products_container = document.getElementById('upload-products-container');
+								let html_add_more_prod_admin = '<h3>Choose the json file containing the products you want to add to the already existing ones.</h3><form id="upload-products"><input type="file" id="productsFile" name="prodFilename"><input type="submit" id="uploadProdSubmitFile" accept=".json" value="Add more"></form>';
+								upload_products_container.insertAdjacentHTML("afterbegin",html_add_more_prod_admin);
+							}
+							// upload prices
+							if(parsedResponse.addPrices == false){
+								let modulePath = "./upload-prices-script.js";
+								import(modulePath);
+								const upload_prices_container = document.getElementById('upload-prices-container');
+								let html_upload_prices_admin = '<h3>Choose the json file containing the product prices you want to upload.</h3><form id="upload-prices"><input type="file" id="pricesFile" name="pricesFilename"><input type="submit" id="uploadPricesSubmitFile" accept=".json"></form>';
+								upload_prices_container.insertAdjacentHTML("afterbegin",html_upload_prices_admin);
+							// add more prices to the existing
+							}else{
+								let modulePath = "./upload-prices-script.js";
+								import(modulePath);
+								const upload_prices_container = document.getElementById('upload-prices-container');
+								let html_add_more_prices_admin = '<h3>Choose the json file containing the product prices you want to add to the already existing ones.</h3><form id="upload-prices"><input type="file" id="pricesFile" name="pricesFilename"><input type="submit" id="uploadPricesSubmitFile" accept=".json" value="Add more"></form>';
+								upload_prices_container.insertAdjacentHTML("afterbegin",html_add_more_prices_admin);
 							}
 						}
 					}

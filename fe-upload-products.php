@@ -40,7 +40,6 @@
 		<main>
 			<h2>Upload Products</h2>
 			<h2>Here you can upload product categories, subcategories, products and prices</h2>
-			<p>To <b>initialize</b> or <b>add more</b> product categories/subcategories, please use the <b>first form</b>!</p>
 			<div class="upload-categories-container" id="upload-categories-container">
 				<!--<h3>Choose the json file containing the categories/subcategories/products you want to upload.</h3>
 				<form id="upload-categories-subcategories">
@@ -49,11 +48,19 @@
 				</form>-->
 			</div> 
 			
-			<h3>Choose the json file containing the product prices you want to upload.</h3>
+			<div class="upload-products-container" id="upload-products-container">
+				<!--inject container-->	
+			</div>
+			<!--<h3>Choose the json file containing the product prices you want to upload.</h3>
 			<form id="upload-product-prices">
 				<input type="file" id="pricesFile" name="pricesFilename">
 				<input type="submit" id="submitFile" accept=".json">
 			</form>
+			-->
+			<div class="upload-prices-container" id="upload-prices-container">
+
+			</div>
+			
 			<h3>You can also erase all related data in the system using the button below.</h3>
 			<input type="button" id="delete_categories_btn" value="Delete All Categories/Products Data"></input>
 		</main>

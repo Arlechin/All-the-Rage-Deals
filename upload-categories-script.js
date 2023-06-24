@@ -1,11 +1,11 @@
 const file = document.querySelector('#categoriesFile');
 const form = document.querySelector('#upload-categories-subcategories');
-$('#uploadSubmitFile').attr('disabled',true);
+$('#uploadCatSubmitFile').attr('disabled', true);
 file.addEventListener('change', function() {
-	if(file.files.length>0){
-		$('#uploadSubmitFile').removeAttr('disabled');
+	if(file.files.length > 0){
+		$('#uploadCatSubmitFile').removeAttr('disabled');
 	}else{
-		$('#uploadSubmitFile').attr('disabled',true);
+		$('#uploadCatSubmitFile').attr('disabled', true);
 	}
 });
 form.addEventListener('submit', function() {
@@ -14,7 +14,7 @@ form.addEventListener('submit', function() {
 	var fileReader = new FileReader();
 	fileReader.readAsText(file.files[0]);
 
-	fileReader.onload = function() {
+	fileReader.onload = function(event) {
 		var parsed_json = $.parseJSON(fileReader.result);
 		var retrievedCategoriesArray = [];
 		var retrievedSubcategoriesArray = [];
