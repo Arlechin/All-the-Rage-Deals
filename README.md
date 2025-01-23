@@ -1,5 +1,5 @@
 # All-the-Rage-Deals
-My second attempt at developing a website. Visually simple yet fully functional so far. An ongoing project.
+A second attempt at developing a website. Visually simple yet fully functional so far.
 
 The goal of this project is to develop a collaborative system through which we can insert, search for and evaluate deals of a wide variety of super-market products among users.
 
